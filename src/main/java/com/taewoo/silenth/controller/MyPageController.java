@@ -3,7 +3,7 @@ package com.taewoo.silenth.controller;
 import com.taewoo.silenth.service.MyPageService;
 import com.taewoo.silenth.web.dto.ApiResponse;
 import com.taewoo.silenth.web.dto.MyPageResponse;
-import com.taewoo.silenth.web.dto.NicknameUpdateRequest;
+import com.taewoo.silenth.web.dto.UsernameUpdateRequest;
 import com.taewoo.silenth.web.entity.User;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -31,9 +31,9 @@ public class MyPageController {
     @PatchMapping("/username")
     public ResponseEntity<ApiResponse<Void>> updateUsername(
             @AuthenticationPrincipal User user,
-            @Valid @RequestBody NicknameUpdateRequest request
+            @Valid @RequestBody UsernameUpdateRequest request
     ) {
-        myPageService.updateNickname(user.getId(), request.getNickname());
+        myPageService.updateUsername(user.getId(), request.getUsername());
         return ResponseEntity.ok(ApiResponse.onSuccessWithMessage("닉네임이 성공적으로 변경되었습니다."));
     }
 
