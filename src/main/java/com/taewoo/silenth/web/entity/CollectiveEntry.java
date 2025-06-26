@@ -46,4 +46,8 @@ public class CollectiveEntry {
         this.eraMonth = originalPost.getCreatedAt().getMonthValue();
         this.timeSlot = TimeSlot.Eof(originalPost.getCreatedAt().toLocalTime());
     }
+
+    public LocalDateTime getOriginalCreatedAt() {
+        return this.originalCreatedAt;
+    }
 }

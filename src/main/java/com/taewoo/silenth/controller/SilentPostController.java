@@ -64,13 +64,13 @@ public class SilentPostController {
 
     @PatchMapping("/{postId}/consent")
     @Operation(summary = "게시글 아카이빙 동의", description = "특정 게시글을 '공감 연대기'에 포함시키는 것에 동의합니다.")
-    public ResponseEntity<com.taewoo.silenth.web.dto.commonResponse.ApiResponse<Void>> giveArchivingConsent(
+    public ResponseEntity<com.taewoo.silenth.web.dto.commonResponse.ApiResponse<Boolean>> giveArchivingConsent(
             @PathVariable Long postId,
             @AuthenticationPrincipal UserPrincipal userPrincipal
     ) {
         User loginUser = userPrincipal.getUser();
-        silentPostService.giveArchivingConsent(loginUser.getId(), postId);
-        return ResponseEntity.ok(com.taewoo.silenth.web.dto.commonResponse.ApiResponse.onSuccessWithMessage("아카이빙에 동의 처리되었습니다."));
+        boolean newConsentState = silentPostService.toggleArchivingConsent(loginUser.getId(), postId);
+        return ResponseEntity.ok(com.taewoo.silenth.web.dto.commonResponse.ApiResponse.onSuccessWithData(newConsentState));
     }
 
     @Operation(summary = "태그별 감정 기록 조회", description = "특정 감정 태그를 가진 기록들을 최신순으로 조회")

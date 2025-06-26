@@ -15,7 +15,8 @@ public record PostResponse(
         int echoCount,
         LocalDateTime createdAt,
         List<String> tags,
-        boolean isAnonymous
+        boolean isAnonymous,
+        boolean consentToArchive
 ) {
     public static PostResponse from(SilentPost post) {
         String nickname = post.isAnonymous() ? "익명의 감정" : post.getUser().getNickname();
@@ -30,7 +31,8 @@ public record PostResponse(
                 post.getEmotionTags().stream()
                         .map(tag -> tag.getEmotionTag().getTagName())
                         .collect(Collectors.toList()),
-                post.isAnonymous()
+                post.isAnonymous(),
+                post.isConsentToArchive()
 //                        .map(EmotionTag::getTagName)
 //                        .toList()
         );

@@ -12,7 +12,7 @@ import java.util.List;
 public interface SilentPostService {
     SilentPostCreateResponse createPost(Long userId, SilentPostCreateRequest request);
     Page<PostResponse> getPostFeed(Pageable pageable);
-    void giveArchivingConsent(Long userId, Long postId);
+    boolean toggleArchivingConsent(Long userId, Long postId);
     Page<PostResponse> getMyPosts(Long userId, Pageable pageable);
     List<EmotionTag> analyzeAndCreateTags(String content);
 

@@ -82,8 +82,7 @@ public class SilentPostServiceImpl implements SilentPostService {
 
     @Override
     @Transactional
-    public void giveArchivingConsent(Long userId, Long postId) {
-        // ... (기존 로직 유지)
+    public boolean toggleArchivingConsent(Long userId, Long postId) {
         SilentPost post = silentPostRepository.findById(postId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.POST_NOT_FOUND));
 
@@ -91,7 +90,8 @@ public class SilentPostServiceImpl implements SilentPostService {
             throw new BusinessException(ErrorCode.UNAUTHORIZED_POST_ACCESS);
         }
 
-        post.giveConsent();
+        post.toggleConsent();
+        return post.isConsentToArchive();
     }
 
     @Override
