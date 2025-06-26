@@ -1,1 +1,8 @@
-POST http://localhost:8080/api/v1/test/archive
+### 1. 로그인하여 새로운 Access/Refresh 토큰 발급받기
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "loginId": "user1",
+    "password": "password"
+}

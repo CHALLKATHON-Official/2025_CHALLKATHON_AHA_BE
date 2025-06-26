@@ -25,7 +25,6 @@ public class EmotionTag {
     @OneToMany(mappedBy = "emotionTag", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SilentPostEmotionTag> postTags = new ArrayList<>();
 
-
     public EmotionTag(String tagName){
         this.tagName = tagName;
     }

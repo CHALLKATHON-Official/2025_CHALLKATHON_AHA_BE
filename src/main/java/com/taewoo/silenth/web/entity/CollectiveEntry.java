@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -37,6 +38,10 @@ public class CollectiveEntry {
     @Column(nullable = false)
     private TimeSlot timeSlot;
 
+    // 👇 태그 정보를 저장할 필드를 추가합니다.
+    @Column(nullable = false)
+    private String tags;
+
     @Builder
     public CollectiveEntry(SilentPost originalPost) {
         this.originalPost = originalPost;
@@ -45,5 +50,9 @@ public class CollectiveEntry {
         this.eraYear = originalPost.getCreatedAt().getYear();
         this.eraMonth = originalPost.getCreatedAt().getMonthValue();
         this.timeSlot = TimeSlot.Eof(originalPost.getCreatedAt().toLocalTime());
+        // 👇 빌더 로직에 태그를 문자열로 변환하여 저장하는 코드를 추가합니다.
+        this.tags = originalPost.getEmotionTags().stream()
+                .map(tagLink -> tagLink.getEmotionTag().getTagName())
+                .collect(Collectors.joining(","));
     }
 }
