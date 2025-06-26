@@ -53,8 +53,8 @@ public class SilentPost extends BaseTimeEntity {
     @Column(nullable = false)
     private boolean isAnonymous = true;
 
-    public void giveConsent() {
-        this.consentToArchive = true;
+    public void toggleConsent() {
+        this.consentToArchive = !this.consentToArchive;
     }
 
     public int getEchoCount() {

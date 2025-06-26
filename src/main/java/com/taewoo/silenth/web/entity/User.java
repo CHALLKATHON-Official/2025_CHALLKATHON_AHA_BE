@@ -38,7 +38,7 @@ public class User extends BaseTimeEntity implements UserDetails {
     @Column(nullable = false, unique = true, length = 20)
     private String nickname;
 
-    private String username;
+    // private String username;
 
     @Column(nullable = false, unique = true, length = 255)
     private String loginId;
